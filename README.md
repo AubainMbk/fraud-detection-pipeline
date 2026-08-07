@@ -1,6 +1,6 @@
 ![CI](https://github.com/AubainMbk/fraud-detection-pipeline/actions/workflows/ci.yml/badge.svg)
 
-# FraudLens — Plateforme de détection de fraude bancaire de bout en bout
+# FraudLens - Plateforme de détection de fraude bancaire de bout en bout
 
 Pipeline complet de détection de fraude : ingestion batch et streaming, feature engineering,
 modèle de scoring versionné, API temps réel, orchestration, et une interface en langage
@@ -62,10 +62,10 @@ Airflow (`localhost:8080`), MLflow (`localhost:5000`).
 - [x] Pipeline streaming (Redpanda) : générateur de transactions → scoring en continu → traçabilité complète
 - [x] Orchestration Airflow du pipeline batch, idempotence validée par rejeu
 - [x] CI/CD (GitHub Actions) : lint, tests unitaires, build Docker à chaque push
-- [ ] FraudLens : interface en langage naturel (RAG documentaire + text-to-SQL) — en cours
+- [ ] FraudLens : interface en langage naturel (RAG documentaire + text-to-SQL) - en cours
 
 ## Décisions techniques notables
 
 Chaque choix (PostgreSQL plutôt que Spark à cette échelle, Redpanda plutôt que Kafka natif,
 dbt par-dessus SQL brut, pgvector plutôt qu'une base vectorielle dédiée...) est documenté
-et justifié à dessein — voir les commentaires dans le code et les messages de commit.
+et justifié à dessein - voir les commentaires dans le code et les messages de commit.
