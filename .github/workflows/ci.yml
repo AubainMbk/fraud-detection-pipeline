@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout du code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Installation de Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.6.0
         with:
           python-version: "3.12"
 
@@ -32,7 +32,7 @@ jobs:
     needs: lint-and-test
     steps:
       - name: Checkout du code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Build de l'image API (validation du Dockerfile)
         run: docker build -f docker/Dockerfile.api -t fraud-api:ci-check .
