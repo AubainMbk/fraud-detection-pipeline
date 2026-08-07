@@ -1,0 +1,8 @@
+﻿fastapi
+uvicorn[standard]
+pydantic
+pandas
+joblib
+xgboost
+scikit-learn
+python-dotenv
