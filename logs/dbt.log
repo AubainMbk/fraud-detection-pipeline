@@ -1,0 +1,112 @@
+[0m11:16:37.680889 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4DC578CB0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4DA8DAAE0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4D9EB9520>]}
+
+
+============================== 11:16:37.685900 | 67c16224-cfa2-444c-814a-273cda972072 ==============================
+[0m11:16:37.685900 [info ] [MainThread]: Running with dbt=1.12.0
+[0m11:16:37.686908 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'maximum_seed_size_mib': '1', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\aubai\\.dbt', 'invocation_command': 'dbt init fraud_dbt', 'hints_enabled': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'logs'}
+[0m11:16:37.704924 [info ] [MainThread]: Creating dbt configuration folder at C:\Users\aubai\.dbt
+[0m11:16:37.706906 [debug] [MainThread]: Starter project path: C:\Users\aubai\Documents\fraud-detection-pipeline\venv\Lib\site-packages\dbt\include\starter_project
+[0m11:16:37.746441 [info ] [MainThread]: Setting up your profile.
+[0m11:18:32.334142 [info ] [MainThread]: Profile fraud_dbt written to C:\Users\aubai\.dbt\profiles.yml using target's profile_template.yml and your supplied values.
+[0m11:18:32.337147 [info ] [MainThread]: Running dbt debug to validate the project...
+[0m11:18:32.337147 [info ] [MainThread]: dbt version: 1.12.0
+[0m11:18:32.338139 [info ] [MainThread]: python version: 3.12.6
+[0m11:18:32.338139 [info ] [MainThread]: python path: C:\Users\aubai\Documents\fraud-detection-pipeline\venv\Scripts\python.exe
+[0m11:18:32.339810 [info ] [MainThread]: os info: Windows-11-10.0.26200-SP0
+[0m11:18:32.412739 [info ] [MainThread]: Using profiles dir at C:\Users\aubai\.dbt
+[0m11:18:32.412739 [info ] [MainThread]: Using profiles.yml file at C:\Users\aubai\.dbt\profiles.yml
+[0m11:18:32.413738 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\aubai\Documents\fraud-detection-pipeline\fraud_dbt\dbt_project.yml
+[0m11:18:32.414811 [info ] [MainThread]: adapter type: postgres
+[0m11:18:32.415788 [info ] [MainThread]: adapter version: 1.11.0
+[0m11:18:32.502786 [info ] [MainThread]: Configuration:
+[0m11:18:32.503744 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m11:18:32.503744 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m11:18:32.503744 [info ] [MainThread]: Required dependencies:
+[0m11:18:32.504744 [debug] [MainThread]: Executing "git --help"
+[0m11:18:32.542149 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m11:18:32.543151 [debug] [MainThread]: STDERR: "b''"
+[0m11:18:32.543151 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m11:18:32.543151 [info ] [MainThread]: Connection:
+[0m11:18:32.544152 [info ] [MainThread]:   host: localhost
+[0m11:18:32.544152 [info ] [MainThread]:   port: 5432
+[0m11:18:32.544152 [info ] [MainThread]:   user: fraud_admin
+[0m11:18:32.545149 [info ] [MainThread]:   database: fraud_db
+[0m11:18:32.545149 [info ] [MainThread]:   schema: dbt_gold
+[0m11:18:32.545149 [info ] [MainThread]:   connect_timeout: 10
+[0m11:18:32.546151 [info ] [MainThread]:   role: None
+[0m11:18:32.546151 [info ] [MainThread]:   search_path: None
+[0m11:18:32.546151 [info ] [MainThread]:   keepalives_idle: 0
+[0m11:18:32.546151 [info ] [MainThread]:   sslmode: None
+[0m11:18:32.547155 [info ] [MainThread]:   sslcert: None
+[0m11:18:32.547155 [info ] [MainThread]:   sslkey: None
+[0m11:18:32.547155 [info ] [MainThread]:   sslrootcert: None
+[0m11:18:32.548151 [info ] [MainThread]:   application_name: dbt
+[0m11:18:32.548151 [info ] [MainThread]:   autocommit: False
+[0m11:18:32.548151 [info ] [MainThread]:   retries: 1
+[0m11:18:32.549159 [info ] [MainThread]: Registered adapter: postgres=1.11.0
+[0m11:18:32.927362 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m11:18:38.846789 [debug] [MainThread]: Using postgres connection "debug"
+[0m11:18:38.847789 [debug] [MainThread]: On debug: select 1 as id
+[0m11:18:38.847789 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m11:18:42.911916 [debug] [MainThread]: Postgres adapter: Got a retryable error when attempting to open a postgres connection.
+1 attempts remaining. Retrying in 0 seconds.
+Error:
+connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+[0m11:18:47.003858 [debug] [MainThread]: Postgres adapter: Error running SQL: select 1 as id
+[0m11:18:47.003858 [debug] [MainThread]: Postgres adapter: Rolling back transaction.
+[0m11:18:47.003858 [debug] [MainThread]: On debug: No close available on handle
+[0m11:18:47.003858 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m11:18:47.005336 [info ] [MainThread]: [31m1 check failed:[0m
+[0m11:18:47.005336 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+  	Is the server running on that host and accepting TCP/IP connections?
+  connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+  	Is the server running on that host and accepting TCP/IP connections?
+  
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m11:18:47.006342 [info ] [MainThread]: Your new dbt project "fraud_dbt" was created!
+Initialized new project in C:\Users\aubai\Documents\fraud-detection-pipeline\fraud_dbt\fraud_dbt
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m11:18:47.006342 [info ] [MainThread]: [31mYour profile may need adjustments. You can find the logs of `dbt debug` above[0m
+[0m11:18:47.007716 [debug] [MainThread]: Command `dbt init` succeeded at 11:18:47.006342 after 129.47 seconds
+[0m11:18:47.007716 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m11:18:47.007716 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4DC9FECF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4DAB5CEF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4DAB5FC80>]}
+[0m11:18:47.007716 [debug] [MainThread]: Flushing usage events
+[0m11:18:47.614916 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m11:19:23.733352 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000153D9C03800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000153D9C03920>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000153D8E616D0>]}
+
+
+============================== 11:19:23.737703 | e73fd3d3-b757-4baa-8cb7-ede396e9f8c0 ==============================
+[0m11:19:23.737703 [info ] [MainThread]: Running with dbt=1.12.0
+[0m11:19:23.738720 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'maximum_seed_size_mib': '1', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\aubai\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'hints_enabled': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'invocation_command': 'dbt init fraud_dbt', 'log_path': 'logs'}
+[0m11:19:23.757840 [info ] [MainThread]: A project called fraud_dbt already exists here.
+[0m11:19:23.758866 [debug] [MainThread]: Command `dbt init` succeeded at 11:19:23.758866 after 0.20 seconds
+[0m11:19:23.758866 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000153DB685010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000153D9898800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000153DB7FF170>]}
+[0m11:19:23.760065 [debug] [MainThread]: Flushing usage events
+[0m11:19:24.365750 [debug] [MainThread]: An error was encountered while trying to flush usage events

@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installation de Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installation des dépendances de test
+        run: pip install ruff pytest httpx pydantic fastapi
+
+      - name: Lint (ruff)
+        run: ruff check .
+
+      - name: Tests unitaires
+        run: pytest tests/ -v
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Build de l'image API (validation du Dockerfile)
+        run: docker build -f docker/Dockerfile.api -t fraud-api:ci-check .

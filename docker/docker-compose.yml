@@ -1,0 +1,145 @@
+x-airflow-common: &airflow-common
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile.airflow
+  environment:
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://fraud_admin:fraud_pwd_dev@postgres/airflow_db
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__WEBSERVER__SECRET_KEY: "dev_secret_key_change_in_prod"
+    POSTGRES_HOST: postgres
+    POSTGRES_PORT: "5432"
+    POSTGRES_DB: fraud_db
+    POSTGRES_USER: fraud_admin
+    POSTGRES_PASSWORD: fraud_pwd_dev
+    MINIO_ENDPOINT: http://minio:9000
+    MINIO_ACCESS_KEY: minio_admin
+    MINIO_SECRET_KEY: minio_pwd_dev
+    MINIO_BUCKET_RAW: raw
+  volumes:
+    - ../dags:/opt/airflow/dags
+    - ../scripts:/opt/airflow/scripts
+    - ../sql:/opt/airflow/sql
+    - airflow_logs:/opt/airflow/logs
+    - ../data:/opt/airflow/data
+  depends_on:
+    - postgres
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: fraud_postgres
+    environment:
+      POSTGRES_USER: fraud_admin
+      POSTGRES_PASSWORD: fraud_pwd_dev
+      POSTGRES_DB: fraud_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio:latest
+    container_name: fraud_minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio_admin
+      MINIO_ROOT_PASSWORD: minio_pwd_dev
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+
+
+  fraud-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    container_name: fraud_api
+    env_file:
+      - ../.env
+    environment:
+      POSTGRES_HOST: postgres
+      MINIO_ENDPOINT: http://minio:9000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - minio
+    restart: unless-stopped
+  
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:latest
+    container_name: fraud_redpanda
+    command:
+      - redpanda
+      - start
+      - --smp=1
+      - --memory=512M
+      - --overprovisioned
+      - --node-id=0
+      - --kafka-addr=PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr=PLAINTEXT://localhost:9092
+    ports:
+      - "9092:9092"
+      - "9644:9644"
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+    profiles: ["streaming"]
+
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: fraud_airflow_init
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - "airflow db migrate && airflow users create --username admin --password admin --firstname Data --lastname Engineer --role Admin --email admin@example.com"
+    profiles: ["orchestration"]
+
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: fraud_airflow_webserver
+    command: webserver
+    ports:
+      - "8080:8080"
+    depends_on:
+      - airflow-init
+    profiles: ["orchestration"]
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: fraud_airflow_scheduler
+    command: scheduler
+    depends_on:
+      - airflow-init
+    profiles: ["orchestration"]
+    
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.19.0
+    container_name: fraud_mlflow
+    environment:
+      MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+      AWS_ACCESS_KEY_ID: minio_admin
+      AWS_SECRET_ACCESS_KEY: minio_pwd_dev
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+      - minio
+    command: >
+      mlflow server
+      --backend-store-uri postgresql://fraud_admin:fraud_pwd_dev@postgres/mlflow_db
+      --default-artifact-root s3://mlflow-artifacts/
+      --host 0.0.0.0
+      --port 5000
+    entrypoint: >
+      /bin/sh -c "pip install psycopg2-binary boto3 && mlflow server --backend-store-uri postgresql://fraud_admin:fraud_pwd_dev@postgres/mlflow_db --default-artifact-root s3://mlflow-artifacts/ --host 0.0.0.0 --port 5000"
+
+volumes:
+  postgres_data:
+  minio_data:
+  redpanda_data:
+  airflow_logs:

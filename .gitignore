@@ -1,0 +1,11 @@
+.env
+venv/
+__pycache__/
+*.pyc
+data/
+.ipynb_checkpoints/
+models/
+fraud_dbt/target/
+fraud_dbt/dbt_packages/
+fraud_dbt/logs/
+.pytest_cache/
