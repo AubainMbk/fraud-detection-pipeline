@@ -4,7 +4,8 @@ __pycache__/
 *.pyc
 data/
 .ipynb_checkpoints/
-models/
+models/*.joblib
+models/*.pkl
 fraud_dbt/target/
 fraud_dbt/dbt_packages/
 fraud_dbt/logs/
