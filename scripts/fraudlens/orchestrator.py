@@ -6,9 +6,9 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from langchain_ollama import ChatOllama
-from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_ollama import ChatOllama
 
 load_dotenv()
 
@@ -17,8 +17,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 sys.path.append(os.path.join(PROJECT_ROOT, "scripts", "rag"))
 sys.path.append(os.path.join(PROJECT_ROOT, "scripts", "text_to_sql"))
 
-from rag_query import answer_question as rag_answer  # noqa: E402
 from query_engine import answer_question as sql_answer  # noqa: E402
+from rag_query import answer_question as rag_answer  # noqa: E402
 
 ROUTER_MODEL = "llama3.1:8b"
 

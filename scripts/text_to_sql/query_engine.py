@@ -7,12 +7,11 @@ import sys
 
 import psycopg2
 from dotenv import load_dotenv
-from langchain_ollama import ChatOllama
-from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_ollama import ChatOllama
 from schema_context import SCHEMA_DESCRIPTION
-from sql_guardrails import validate_and_secure_sql, UnsafeQueryError
+from sql_guardrails import UnsafeQueryError, validate_and_secure_sql
 
 load_dotenv()
 
