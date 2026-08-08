@@ -26,7 +26,7 @@
 | Apache Spark / Databricks | Calcul distribué sur cluster | Données trop grosses pour une machine, transformations lourdes en parallèle |
 | Snowflake / BigQuery / Redshift | Entrepôt cloud analytique (OLAP) | Requêtes analytiques à très large échelle, séparation stockage/calcul, multi-équipes |
 
-**:** *"J'ai délibérément gardé PostgreSQL car la volumétrie ne justifiait pas Spark - j'explique aussi comment j'introduirais Spark si le volume était multiplié par 100 : partitionnement du calcul de features, lecture distribuée depuis le data lake plutôt que du chargement en RAM."*
+**:** *"J'ai délibérément gardé PostgreSQL car la volumétrie ne justifiait pas Spark -  j'introduirais Spark si le volume était multiplié par 100 : partitionnement du calcul de features, lecture distribuée depuis le data lake plutôt que du chargement en RAM."*
 
 ---
 
@@ -104,9 +104,9 @@
 
 **Choix fait :** Interface en langage naturel pour les analystes fraude, combinant données structurées (nos tables Gold/streaming) et documents non structurés (procédures de compliance, historiques de cas).
 
-**Pourquoi c'est le bon différenciant :** La plupart des projets de portfolio juniors s'arrêtent au modèle ou à l'API. Une interface RAG bien construite démontre une compétence à forte demande actuelle et rare chez les juniors : faire dialoguer un LLM avec des données d'entreprise réelles, pas juste un chatbot générique.
+**Pourquoi c'est le bon différenciant :** La plupart des projets s'arrêtent au modèle ou à l'API. Une interface RAG bien construite démontre une capacité cruciale : faire dialoguer un LLM avec des données d'entreprise réelles, pas juste un chatbot générique.
 
-**Écosystème à connaître (pas à maîtriser tout) :**
+**Écosystème à connaître :**
 | Brique | Rôle | Alternatives |
 |---|---|---|
 | LangChain / LlamaIndex | Framework d'orchestration LLM (chaînage de prompts, gestion du contexte) | Écrire l'orchestration à la main (plus de contrôle, plus de code) |
@@ -114,13 +114,13 @@
 | LLM (API Anthropic/OpenAI, ou modèle open source local) | Génère la réponse en langage naturel | Modèle managé (simple, payant à l'usage) vs auto-hébergé (complexe, gratuit à l'usage) |
 | Text-to-SQL | Traduit une question en langage naturel vers une requête sur nos tables Gold | Approche complémentaire au RAG documentaire pur |
 
-**Point important à avoir en tete :** un système RAG en contexte bancaire soulève une vraie question de gouvernance - peut-on faire confiance à un LLM pour répondre sur des données sensibles ? On documentera les limites (hallucination possible, besoin de citer les sources, human-in-the-loop pour toute décision impactante) - savoir nommer ces limites *sans qu'on te les demande* est un signal de maturité fort.
+**Point important à avoir en tete :** un système RAG en contexte bancaire soulève une vraie question de gouvernance - peut-on faire confiance à un LLM pour répondre sur des données sensibles ? On documentera les limites (hallucination possible, besoin de citer les sources, human-in-the-loop pour toute décision impactante) 
 
 ---
 
 ## 10. CI/CD - GitHub Actions vs GitLab CI vs Jenkins
 
-**Choix fait :** GitHub Actions (probable, projet hébergé sur GitHub).
+**Choix fait :** GitHub Actions
 
 **Pourquoi :** Intégré nativement au dépôt, pas d'infrastructure à gérer, syntaxe YAML simple. Suffisant pour un projet de cette taille (tests automatiques + build Docker à chaque push).
 
