@@ -26,7 +26,7 @@
 | Apache Spark / Databricks | Calcul distribué sur cluster | Données trop grosses pour une machine, transformations lourdes en parallèle |
 | Snowflake / BigQuery / Redshift | Entrepôt cloud analytique (OLAP) | Requêtes analytiques à très large échelle, séparation stockage/calcul, multi-équipes |
 
-**:** *"J'ai délibérément gardé PostgreSQL car la volumétrie ne justifiait pas Spark -  j'introduirais Spark si le volume était multiplié par 100 : partitionnement du calcul de features, lecture distribuée depuis le data lake plutôt que du chargement en RAM."*
+*"J'ai délibérément gardé PostgreSQL car la volumétrie ne justifiait pas Spark -  j'introduirais Spark si le volume était multiplié par 100 : partitionnement du calcul de features, lecture distribuée depuis le data lake plutôt que du chargement en RAM."*
 
 ---
 
