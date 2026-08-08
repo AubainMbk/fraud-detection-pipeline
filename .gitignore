@@ -10,3 +10,4 @@ fraud_dbt/target/
 fraud_dbt/dbt_packages/
 fraud_dbt/logs/
 .pytest_cache/
+.streamlit/

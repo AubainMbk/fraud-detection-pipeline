@@ -63,7 +63,7 @@ Airflow (`localhost:8080`), MLflow (`localhost:5000`).
 - [x] Orchestration Airflow du pipeline batch, idempotence validée par rejeu
 - [x] CI/CD (GitHub Actions) : lint, tests unitaires, build Docker à chaque push
 - [x] FraudLens — RAG documentaire : recherche vectorielle (pgvector) sur des documents de compliance, génération contrainte au contexte (garde-fou anti-hallucination), avec un contrôle de fidélité factuelle automatisé — voir `docs/rag_lessons_learned.md`
-- [ ] FraudLens — Text-to-SQL : interrogation en langage naturel des données de transactions/scoring — en cours
+- [x] FraudLens — Text-to-SQL : génération SQL contrainte au schéma (LLM), validée par un parseur SQL (tables autorisées, lecture seule uniquement), exécutée avec un rôle Postgres dédié en lecture seule et un timeout — testé avec succès contre une tentative d'injection de prompt
 
 ## FraudLens — RAG documentaire
 
