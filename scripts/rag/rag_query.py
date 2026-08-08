@@ -5,12 +5,13 @@ contexte -> génération de réponse avec citation des sources.
 """
 import os
 import sys
-import requests
+
 import psycopg2
+import requests
 from dotenv import load_dotenv
-from langchain_ollama import ChatOllama
-from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_ollama import ChatOllama
 
 load_dotenv()
 

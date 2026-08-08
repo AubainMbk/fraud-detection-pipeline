@@ -2,13 +2,13 @@
 Ingestion des documents de compliance : découpage en chunks, vectorisation
 via Ollama (nomic-embed-text), stockage dans pgvector.
 """
-import os
-import re
 import glob
 import logging
+import os
+import re
 
-import requests
 import psycopg2
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -39,7 +39,7 @@ def chunk_document(text: str) -> list[str]:
     chunks = []
 
     for para in raw_paragraphs:
-        lines = [l.strip() for l in para.split("\n")]
+        lines = [line.strip() for line in para.split("\n")]
         if list_item_pattern.match(lines[0]):
             current = []
             for line in lines:

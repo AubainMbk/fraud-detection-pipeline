@@ -1,7 +1,8 @@
 """Test isolé de la recherche sémantique, sans génération LLM -- valide le retrieval seul."""
 import os
-import requests
+
 import psycopg2
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()

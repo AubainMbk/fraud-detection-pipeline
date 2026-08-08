@@ -1,5 +1,6 @@
 """Diagnostic : classement complet par document (pas par chunk) pour une question donnée."""
 import os
+
 import psycopg2
 import requests
 from dotenv import load_dotenv
