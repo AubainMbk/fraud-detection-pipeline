@@ -22,7 +22,7 @@ analyste métier d'interroger le système sans écrire de SQL ?
 | Streaming | Redpanda (API Kafka) |
 | Modèle ML | XGBoost, scikit-learn, MLflow (tracking + registry) |
 | API | FastAPI, Docker |
-| RAG / LLM | LangChain, pgvector, API Anthropic Claude |
+| RAG / LLM | LangChain, pgvector, Ollama (llama3.1:8b + nomic-embed-text, local) |
 | CI/CD | GitHub Actions, pytest, ruff |
 
 ## Architecture
@@ -62,7 +62,20 @@ Airflow (`localhost:8080`), MLflow (`localhost:5000`).
 - [x] Pipeline streaming (Redpanda) : générateur de transactions → scoring en continu → traçabilité complète
 - [x] Orchestration Airflow du pipeline batch, idempotence validée par rejeu
 - [x] CI/CD (GitHub Actions) : lint, tests unitaires, build Docker à chaque push
-- [ ] FraudLens : interface en langage naturel (RAG documentaire + text-to-SQL) - en cours
+- [x] FraudLens — RAG documentaire : recherche vectorielle (pgvector) sur des documents de compliance, génération contrainte au contexte (garde-fou anti-hallucination), avec un contrôle de fidélité factuelle automatisé — voir `docs/rag_lessons_learned.md`
+- [ ] FraudLens — Text-to-SQL : interrogation en langage naturel des données de transactions/scoring — en cours
+
+## FraudLens — RAG documentaire
+
+Un analyste peut interroger en langage naturel un corpus de documents de compliance
+(procédures, seuils réglementaires) via recherche sémantique (pgvector + embeddings
+Ollama) et génération contrainte au contexte fourni (pas de connaissance générale du
+modèle, citation systématique des sources, refus explicite si l'information est absente).
+
+La construction de cette brique a mis en évidence 5 pièges classiques du RAG en
+production (granularité du chunking, conventions du modèle d'embeddings, fragmentation
+du retrieval sur du contenu séquentiel, arrêt prématuré de génération, biais lexical de
+ranking) — diagnostic et correctifs documentés dans `docs/rag_lessons_learned.md`.
 
 ## Décisions techniques notables
 

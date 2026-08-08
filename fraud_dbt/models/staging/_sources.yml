@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: bronze_silver
+    schema: silver
+    tables:
+      - name: transactions
+        description: "Transactions nettoyées et typées, chargées par le pipeline batch Python (load_silver.py)"

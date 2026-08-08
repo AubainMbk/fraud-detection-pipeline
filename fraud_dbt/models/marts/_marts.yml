@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: fct_transaction_features
+    description: "Table de features prêtes pour le scoring fraude, une ligne par transaction"
+    columns:
+      - name: transaction_id
+        description: "Identifiant unique de la transaction"
+        tests:
+          - unique
+          - not_null
+      - name: is_fraud
+        description: "Label vérité terrain"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]
+      - name: amount
+        description: "Montant de la transaction"
+        tests:
+          - not_null

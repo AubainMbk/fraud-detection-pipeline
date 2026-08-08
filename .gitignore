@@ -2,7 +2,7 @@
 venv/
 __pycache__/
 *.pyc
-data/
+data/raw/
 .ipynb_checkpoints/
 models/*.joblib
 models/*.pkl
