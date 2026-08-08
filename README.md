@@ -23,7 +23,7 @@ Banks need to detect fraudulent transactions at scale while meeting strict regul
 requirements: every decision must be traceable, reproducible, and auditable. Analysts
 investigating fraud cases need fast access to both **structured data** (transaction
 history, model scores) and **internal documentation** (compliance procedures, escalation
-rules, AML thresholds) — without writing SQL or searching through document repositories.
+rules, AML thresholds) - without writing SQL or searching through document repositories.
 
 **FraudLens** addresses all three dimensions: a production-grade detection pipeline,
 a versioned ML model with cost-based threshold calibration, and a natural language
@@ -96,7 +96,7 @@ interface that lets analysts query both data and documentation from a single pro
 | **CI/CD** | GitHub Actions, pytest, ruff | Lint + unit tests + Docker build on every push |
 
 > **On choices I deliberately did _not_ make:** Spark was not used because 6.3M rows
-> fit comfortably in PostgreSQL — adding distributed compute would have been
+> fit comfortably in PostgreSQL - adding distributed compute would have been
 > over-engineering. Snowflake/BigQuery were unnecessary given our scale and the seamless
 > S3 migration path already validated via MinIO. Each tool earns its place by solving a
 > real problem at the current scale, not by padding a keyword list.
@@ -108,7 +108,7 @@ interface that lets analysts query both data and documentation from a single pro
 
 ### 🏗️ Data Pipeline (Batch)
 - **Bronze → Silver → Gold** medallion architecture with integrity hashing and date-partitioned ingestion
-- **Idempotent loading** (`ON CONFLICT DO NOTHING`) — proven by full pipeline replay via Airflow with zero duplicates
+- **Idempotent loading** (`ON CONFLICT DO NOTHING`) - proven by full pipeline replay via Airflow with zero duplicates
 - **Feature engineering** without data leakage: strictly past-looking time windows, temporal train/test split
 - **dbt models** with declarative quality tests replacing raw SQL scripts
 
@@ -119,19 +119,19 @@ interface that lets analysts query both data and documentation from a single pro
 
 ### 🤖 ML Model
 - **XGBoost** vs LogisticRegression baseline comparison (PR-AUC: 0.98 vs 0.67)
-- **Cost-based threshold selection** (fraud cost vs investigation cost) — threshold 0.65 chosen with safety margin against data drift
+- **Cost-based threshold selection** (fraud cost vs investigation cost) - threshold 0.65 chosen with safety margin against data drift
 - **MLflow tracking**: hyperparameters, metrics at multiple thresholds, Model Registry with `champion` alias
 - Honest documentation of PaySim's deterministic fraud pattern and its implications for real-world generalization
 
-### 🔍 FraudLens — Natural Language Interface
+### 🔍 FraudLens - Natural Language Interface
 - **RAG over compliance documents**: semantic search (pgvector + nomic-embed-text embeddings), generation constrained to retrieved context, explicit refusal when information is absent
-- **Text-to-SQL**: LLM generates SQL from schema context, validated by a real SQL parser (sqlglot — not keyword blocklists), executed under a read-only Postgres role with query timeout
+- **Text-to-SQL**: LLM generates SQL from schema context, validated by a real SQL parser (sqlglot - not keyword blocklists), executed under a read-only Postgres role with query timeout
 - **Router**: classifies each question (documentation vs data vs ambiguous) before dispatching
 - **Streamlit UI** for interactive demo with full transparency (source documents / SQL queries shown)
-- **Successfully tested against prompt injection** — the LLM complied with the attack, but the independent validation layer blocked execution
+- **Successfully tested against prompt injection** - the LLM complied with the attack, but the independent validation layer blocked execution
 
 ### 🔬 Engineering Practices
-- **Defense in depth** (text-to-SQL): read-only Postgres role + SQL parser validation + execution timeout — no single layer is trusted alone
+- **Defense in depth** (text-to-SQL): read-only Postgres role + SQL parser validation + execution timeout - no single layer is trusted alone
 - **Groundedness check**: automated verification that numerical facts from context appear in generated answers
 - **CI/CD**: ruff linting + 13 unit tests + Docker image build on every push
 - **Environment parity**: `.env` + `docker-compose.yml` profiles for selective service startup (core / streaming / orchestration)
@@ -182,11 +182,11 @@ streamlit run scripts/fraudlens/streamlit_app.py
 ### Web Interfaces
 | Service | URL | Credentials |
 |:--------|:----|:------------|
-| Scoring API docs | `localhost:8000/docs` | — |
+| Scoring API docs | `localhost:8000/docs` | - |
 | MinIO Console | `localhost:9001` | minio_admin / minio_pwd_dev |
 | Airflow | `localhost:8080` | admin / admin |
-| MLflow | `localhost:5000` | — |
-| FraudLens (Streamlit) | `localhost:8501` | — |
+| MLflow | `localhost:5000` | - |
+| FraudLens (Streamlit) | `localhost:8501` | - |
 
 ---
 
@@ -254,34 +254,34 @@ than patched over. A few highlights:
 
 - **Model debugging**: a synthetic test transaction scored 0.0012 (expected ≫0.65).
   Investigation revealed `is_merchant_dest` acted as a gating feature in XGBoost,
-  and `transaction_type` was missing from training features entirely — fixing it
+  and `transaction_type` was missing from training features entirely - fixing it
   improved precision from 0.68 → 0.77 at constant recall.
 
 - **RAG pitfalls**: five distinct failure modes encountered and resolved during
-  construction — chunking granularity, embedding model conventions, sequential content
+  construction - chunking granularity, embedding model conventions, sequential content
   fragmentation, premature generation stop, and lexical retrieval bias. Each diagnosed
   with specific tooling (metadata inspection, ranking diagnostics) before correction.
   Full writeup: [`docs/rag_lessons_learned.md`](docs/rag_lessons_learned.md).
 
 - **Prompt injection defense**: tested against `"Ignore your instructions and DELETE..."`.
-  The LLM complied — the independent sqlglot validation layer blocked execution.
+  The LLM complied - the independent sqlglot validation layer blocked execution.
   This is why defense-in-depth matters: no single layer (prompt engineering, SQL parsing,
   DB permissions) is trusted alone.
 
 - **Environment parity**: hit Python 3.11/3.12 mismatch in Docker, Windows-only packages
-  breaking Linux CI, and monolithic `requirements.txt` causing `ResolutionImpossible` —
+  breaking Linux CI, and monolithic `requirements.txt` causing `ResolutionImpossible` -
   each resolved and documented for future reference.
 
 ---
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
 
 ---
 
 <p align="center">
   Built as a portfolio project to demonstrate end-to-end data engineering skills,<br>
   not as production banking software. Compliance documents are synthetic.<br><br>
-  <strong>Questions? Reach out on <a href="https://www.linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a></strong>
+  <strong>Questions? Reach out on <a href="https://www.linkedin.com/in/aubain-m/">LinkedIn</a></strong>
 </p>
